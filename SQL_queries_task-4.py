@@ -1,5 +1,7 @@
 import sqlite3
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 # Connect to the SQLite database
 conn = sqlite3.connect('New_York_Taxi_Data.db')
@@ -40,3 +42,24 @@ conn.close()
 # Display the result
 print(df_peak_hours)
 print(df_trip_fare)
+
+# 1. Average Fare by Passenger Count: Bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(df_trip_fare['passenger_count'], df_trip_fare['average_fare'], color='skyblue')
+plt.xlabel('Passenger Count')
+plt.ylabel('Average Fare')
+plt.title('Average Fare by Passenger Count')
+plt.xticks(df_trip_fare['passenger_count'])
+plt.grid(axis='y')
+plt.show()
+
+
+# 2. Peak Hours for Taxi Usage: Bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(df_peak_hours['hour'], df_peak_hours['trip_count'], color='orange')
+plt.xlabel('Hour of the Day')
+plt.ylabel('Number of Trips')
+plt.title('Peak Hours for Taxi Usage')
+plt.xticks(df_peak_hours['hour'])
+plt.grid(axis='y')
+plt.show()
